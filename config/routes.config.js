@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const usersController = require("../controllers/users.controller");
-const productsController = require("../controllers/products.controller");
+const propertyController = require("../controllers/property.controller");
+const miscControllers = require("../controllers/misc.controller");
 
-router.get("/");
+router.get("/", miscControllers.root);
 
 // Users
 

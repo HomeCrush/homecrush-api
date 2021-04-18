@@ -4,7 +4,7 @@ const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/homecr
 
 mongoose
   .connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
-  .then(() => console.info(`Successfully connected to the database ${MONGODB_URI}`))
+  .then(() => console.info(`Successfully connected to the database ${MONGODB_URI == 'mongodb://localhost:27017/homecrush' ? "development instance" : "production instance"}`))
   .catch((error) => {
     console.error(`An error ocurred trying to connect to de database ${MONGODB_URI}`, error)
     process.exit(0)
