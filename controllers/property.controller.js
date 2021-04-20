@@ -8,21 +8,19 @@ const Like = require("../models/Like.model");
 
 
 module.exports.create = (req, res, next) => {
-    res.render("properties/form");
+    res.render("properties/create");
 };
   
 module.exports.doCreate = (req, res, next) => {
     function renderWithErrors(errors) {
-      res.status(400).render("properties/form", {
+      res.status(400).json("properties/create", {
         errors: errors,
         product: req.body,
       });
     }
   
     Property.create(req.body)
-      .then((u) => {
-        res.redirect(`/properties/${id}`);
-      })
+    .then((product) => res.status(201).json(product))
       .catch((e) => {
         if (e instanceof mongoose.Error.ValidationError) {
           renderWithErrors(e.errors);
@@ -47,7 +45,7 @@ module.exports.edit = (req, res, next) => {
         ) {
           res.redirect("/");
         } else {
-          res.render("properties/form", { property });
+          res.json("/properties/${id}/edit", { property });
         }
       })
       .catch((e) => next(e));
@@ -55,7 +53,7 @@ module.exports.edit = (req, res, next) => {
   
 module.exports.doEdit = (req, res, next) => {
     function renderWithErrors(errors) {
-      res.status(400).render("properties/form", {
+      res.status(400).json("/properties/${id}/edit", {
         errors: errors,
         product: req.body,
       });
@@ -67,7 +65,7 @@ module.exports.doEdit = (req, res, next) => {
         } else {
           Object.entries(req.body).forEach(([k, v]) => (property[key] = value));
           return property.save().then(() => {
-            res.redirect(`/properties/${req.params.id}`);
+            res.json(`/properties/${req.params.id}`);
           });
         }
       })

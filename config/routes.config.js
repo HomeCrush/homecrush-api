@@ -19,12 +19,12 @@ router.get("/wishlist");
 router.get("/users");
 
 // Property
-router.get("/property/create");
-router.post("/property/create");
-router.get("/products/:id");
-router.get("/property/:id/edit");
-router.post("/property/:id/edit");
-router.get("/property/:id/delete");
+router.get("/properties/create");
+router.post("/properties/create");
+router.get("/properties/:id");
+router.get("/properties/:id/edit");
+router.post("/properties/:id/edit");
+router.get("/properties/:id/delete");
 
 // Likes
 router.get("/property/:propertyId/like");
