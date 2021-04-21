@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const usersController = require("../controllers/users.controller");
-const propertyController = require("../controllers/property.controller");
+const propertiesController = require("../controllers/properties.controller");
 const miscControllers = require("../controllers/misc.controller");
 
 router.get("/", miscControllers.root);
@@ -19,12 +19,11 @@ router.get("/wishlist");
 router.get("/users");
 
 // Property
-router.get("/property/create");
-router.post("/property/create");
-router.get("/products/:id");
-router.get("/property/:id/edit");
-router.post("/property/:id/edit");
-router.get("/property/:id/delete");
+router.post("/properties/create", propertiesController.create );
+router.get("/properties/:id");
+router.get("/properties/:id/edit");
+router.post("/properties/:id/edit");
+router.get("/properties/:id/delete");
 
 // Likes
 router.get("/property/:propertyId/like");
