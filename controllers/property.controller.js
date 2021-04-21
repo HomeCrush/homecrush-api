@@ -85,7 +85,7 @@ module.exports.deleteProperty = catchAsync(async (req, res, next) => {
   const property = await Property.findByIdAndDelete(req.params.id);
 
   if (!property) {
-    return next('No listing found with that ID', 404);
+    return next('No property found with that ID', 404);
   }
 
   res.status(204).json({
