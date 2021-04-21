@@ -65,7 +65,7 @@ const userSchema = mongoose.Schema({
   toJSON: {
     virtuals: true,
     transform: (document, returnValue) => {
-      ret.id = document._id;
+      returnValue.id = document._id;
       delete returnValue._id;
       delete returnValue.__v;
       delete returnValue.password;
@@ -74,13 +74,10 @@ const userSchema = mongoose.Schema({
   },
 });
 
-userSchema.methods.checkPassword = function (passwordToCheck) {
-  return bcrypt.compare(passwordToCheck, this.password);
-};
 
 userSchema.pre("save", function (next) {
   if (this.isModified("password")) {
-    bcrypt.hash(this.password, SALT_ROUNDS).then((hash) => {
+    bcrypt.hash(this.password, SALT_WORK_FACTOR).then((hash) => {
       this.password = hash;
       next();
     });
@@ -88,6 +85,11 @@ userSchema.pre("save", function (next) {
     next();
   }
 });
+
+userSchema.methods.checkPassword = function (passwordToCheck) {
+  console.log(passwordToCheck)
+  return bcrypt.compare(passwordToCheck, this.password);
+};
 
 userSchema.virtual("properties", {
   ref: "Property",

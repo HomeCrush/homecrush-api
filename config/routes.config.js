@@ -8,26 +8,24 @@ router.get("/", miscControllers.root);
 
 // Users
 
-router.get("/register");
-router.post("/register");
-router.get("/login");
-router.post("/login");
-router.get("/activate/:token");
-router.post("/logout");
-router.get("/profile");
-router.get("/wishlist");
-router.get("/users");
+router.post("/register", usersController.create);
+router.post("/login", usersController.authenticate);
+/*router.get("/activate/:token");PLUS+
+//router.post("/logout");
+router.get("/users/me");
+router.get("/wishlist");//
 
 // Property
+
 router.post("/properties/create", propertiesController.create );
 router.get("/properties/:id");
 router.get("/properties/:id/edit");
 router.post("/properties/:id/edit");
 router.get("/properties/:id/delete");
 
-// Likes
-router.get("/property/:propertyId/like");
-router.get("/property/match");
-router.get("/property/crush");
+// Match
+router.get("/properties/:propertyId/like");
+router.get("/properties/match");
+router.get("/properties/crush");*/
 
 module.exports = router;
