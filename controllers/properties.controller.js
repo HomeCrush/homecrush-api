@@ -9,6 +9,7 @@ module.exports.create = (req, res, next) => {
       .catch(next);
 };
 
+
 module.exports.update = (req, res, next) => {
   if (req.file) {
     req.body.images = req.file.path;
