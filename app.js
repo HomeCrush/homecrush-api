@@ -20,7 +20,7 @@ app.use(cors());
 /* Routes */
 
 const routes = require("./config/routes.config");
-app.use("/", routes);
+app.use("/api", routes);
 
 /* Handle Errors */
 

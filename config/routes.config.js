@@ -16,8 +16,8 @@ router.get("/users/me");
 router.get("/wishlist");//
 
 // Property
-router.get("/properties/create");
-router.post("/properties/create");
+
+router.post("/properties/create", propertiesController.create );
 router.get("/properties/:id");
 router.get("/properties/:id/edit");
 router.post("/properties/:id/edit");
