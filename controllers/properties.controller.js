@@ -44,3 +44,16 @@ Property.findOneAndDelete( {
   res.status(204).json({ status: 204, data: null });
 }) .catch(next);
   };
+
+  module.exports.list = (req, res, next) => {
+    const criteria = {};
+    const { search } = req.query;
+  
+    if (search) {
+      criteria.name = new RegExp(search, "i");
+    }
+  
+    Property.find(criteria)
+      .then((properties) => res.json(properties))
+      .catch(next);
+  };
