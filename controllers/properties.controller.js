@@ -15,6 +15,32 @@ module.exports.create = (req, res, next) => {
       .catch(next);
 };
 
+module.exports.update = (req, res, next) => {
+  const id = req.params.id;
+  const property = req.body;
+
+  if (req.file) {
+    req.body.image = req.file.path;
+  }
+
+  Property.findById(id)
+    .then((property) => {
+      if (!property) {
+        next(createError(404));
+        return;
+      }
+      /*if (property.user.toString() !== req.currentUser.toString()) {
+        next(createError(403));
+        return;
+      }  */   
+      
+      return property.save().then(() => res.json({
+        property
+      }));
+    })
+    .catch(next);
+};
+
 //
 /*module.exports.createProperty = catchAsync(async (req, res, next) => {
   if (!req.body.owner) req.body.owner = req.user.id;
