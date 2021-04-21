@@ -31,17 +31,17 @@ const propertySchema = new mongoose.Schema(
 
     available: {
       type: Boolean,
-      default: "Available field is required",
+      required: "Available field is required",
     },
 
     availableDates: {
       from: {
         type: Date,
-        required: True,
+        required: true,
       },
       to: {
         type: Date,
-        required: True,
+        required: true,
       },
     },
 

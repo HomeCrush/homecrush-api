@@ -12,7 +12,7 @@ module.exports.create = (req, res, next) => {
 
     Property.create(req.body)
     .then((property) => res.status(201).json(property))
-      .catch((e);
+      .catch(next);
 };
 
 //
@@ -81,7 +81,7 @@ module.exports.update = (req, res, next) => {
 });*/
 //
 
-module.exports.deleteProperty = catchAsync(async (req, res, next) => {
+/*module.exports.deleteProperty = catchAsync(async (req, res, next) => {
   const property = await Property.findByIdAndDelete(req.params.id);
 
   if (!property) {
@@ -92,4 +92,4 @@ module.exports.deleteProperty = catchAsync(async (req, res, next) => {
     status: 204,
     data: null,
   });
-});
+});*/
