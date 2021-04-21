@@ -24,3 +24,8 @@ const likeSchema = new mongoose.Schema(
 const Like = mongoose.model("Like", likeSchema);
 
 module.exports = Like;
+
+//id *
+//property i like *
+//id property owner *
+//id my own property  fill whe other likes me

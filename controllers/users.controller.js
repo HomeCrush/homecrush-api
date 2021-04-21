@@ -19,3 +19,33 @@ module.exports.create = (req, res, next) => {
     })
     .catch(next);
 };
+
+module.exports.authenticate = (req, res, next) => {
+    const { email, password } = req.body
+
+    User.findOne({ email })
+        .then(user => {
+            if(!user){
+                next(createError(404, { errors: { email: 'Email or password is incorrect' }}))
+            } else {
+                return user.checkPassword(password)
+                .then(match => {
+                    if(!match){
+                        next(createError(404, { errors: { email: 'Email or password is incorrect' }}))                        
+                    } else {
+                        res.json({
+                            access_token: jwt.sign(
+                                { id: user.id },
+                                process.env.JWT_SECRET || 'changeme OK?',
+                                {
+                                    expiresIn: '1d'
+                                }
+                            )
+                        })
+                    }
+                })
+            }
+        })
+}
+
+
