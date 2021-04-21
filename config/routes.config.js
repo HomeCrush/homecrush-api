@@ -22,8 +22,8 @@ router.get("/users");
 router.post("/properties/create", propertiesController.create );
 router.get("/properties/:id");
 router.get("/properties/:id/edit");
-router.post("/properties/:id/edit");
-router.get("/properties/:id/delete");
+router.post("/properties/:id/edit", propertiesController.update);
+router.delete("/properties/:id/delete", propertiesController.deleteProperty);
 
 // Likes
 router.get("/property/:propertyId/like");
