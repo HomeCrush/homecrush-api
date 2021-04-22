@@ -12,7 +12,6 @@ router.get("/", miscControllers.root);
 router.post("/register", usersController.create);
 router.post("/login", usersController.authenticate);
 router.get("/users/me", authMiddleware.isAuthenticated, usersController.get);
-//router.post("/logout");
 /*router.get("/activate/:token");PLUS+*/
 router.get("/wishlist");//
 
