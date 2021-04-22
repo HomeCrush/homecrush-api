@@ -10,20 +10,18 @@ router.get("/", miscControllers.root);
 // Users
 
 router.post("/register", usersController.create);
-router.post("/login", authMiddleware.isAuthenticated, usersController.authenticate);
-router.get("/users/me", usersController.get);
+router.post("/login", usersController.authenticate);
+router.get("/users/me", authMiddleware.isAuthenticated, usersController.get);
 //router.post("/logout");
 /*router.get("/activate/:token");PLUS+*/
 router.get("/wishlist");//
 
 // Property
 
-router.post("/properties/create", propertiesController.create );
-router.get("/properties/:id");
-router.get("/properties/:id/edit");
-router.post("/properties/:id/edit", propertiesController.update);
-router.delete("/properties/:id/delete", propertiesController.deleteProperty);
-router.get("/properties", propertiesController.list);
+router.post("/properties/create", authMiddleware.isAuthenticated, propertiesController.create );
+router.get("/properties", authMiddleware.isAuthenticated, propertiesController.list);
+router.post("/properties/:id/edit", authMiddleware.isAuthenticated, propertiesController.update);
+router.delete("/properties/:id/delete", authMiddleware.isAuthenticated, propertiesController.deleteProperty);
 
 // Match
 router.get("/properties/:propertyId/like");
