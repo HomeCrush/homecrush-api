@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const likeSchema = new mongoose.Schema(
+const rejectSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.SchemaTypes.ObjectId,
@@ -21,11 +21,7 @@ const likeSchema = new mongoose.Schema(
   }
 );
 
-const Like = mongoose.model("Like", likeSchema);
+const Reject = mongoose.model("Reject", rejectSchema);
 
-module.exports = Like;
+module.exports = Reject;
 
-//id *
-//property i like *
-//id property owner *
-//id my own property  fill whe other likes me
