@@ -24,6 +24,8 @@ router.delete("/properties/:id/delete", authMiddleware.isAuthenticated, properti
 
 // Match
 router.get("/properties/:propertyId/like", authMiddleware.isAuthenticated, miscControllers.like);
+router.get("/properties/:propertyId/reject", authMiddleware.isAuthenticated, miscControllers.reject);
+
 router.get("/properties/match");
 router.get("/properties/crush");
 
