@@ -23,7 +23,7 @@ router.post("/properties/:id/edit", authMiddleware.isAuthenticated, propertiesCo
 router.delete("/properties/:id/delete", authMiddleware.isAuthenticated, propertiesController.deleteProperty);
 
 // Match
-router.get("/properties/:propertyId/like");
+router.get("/properties/:propertyId/like", authMiddleware.isAuthenticated, miscControllers.like);
 router.get("/properties/match");
 router.get("/properties/crush");
 
