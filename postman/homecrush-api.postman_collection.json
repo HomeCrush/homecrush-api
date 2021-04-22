@@ -1,0 +1,251 @@
+{
+	"info": {
+		"_postman_id": "8c1215ff-3a8c-4ffd-bedf-d24157cbaaf5",
+		"name": "homecrush-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User related",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"jwt\", JSON.parse(responseBody).access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"plfriasf@gmail.com\",\n    \"password\": \"Hola1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/login",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Pedro Frias\",\n    \"email\": \"plfriasf3@gmail.com\",\n    \"password\": \"Hola1234\"\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/register",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/users/me",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"users",
+								"me"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{jwt}}",
+						"type": "string"
+					}
+				]
+			}
+		},
+		{
+			"name": "Property related",
+			"item": [
+				{
+					"name": "property create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\":\"Second property Title\",\n\n    \"description\":\"Description text\",\n\n    \"owner\": \"607dd71ff23730ed526d7080\",\n\n    \"images\": \"https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80\",\n\n    \"shareWith\": \"607dd78acbe580ef53d49470\",\n\n    \"available\": true,\n\n    \"availableDates.from\": \"02/26/1988\",\n\n    \"availableDates.to\": \"04/24/2021\",    \n\n    \"location\": \"Planet earth\",\n\n    \"homeType\": \"house\",\n\n    \"beds.singleBeds\": 2,\n\n    \"beds.doubleBeds\": 1,    \n\n    \"bedRooms\": 2,\n\n    \"bathRooms\": 3,\n\n    \"surfaceArea\": 55,\n\n    \"amenities.tv\": true,\n\n    \"rules.petsWelcome\": true\n\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/properties/create",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"properties",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "property edit",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\":\"first property Title\",\n\n    \"description\":\"Description text\",\n\n    \"owner\": \"607dd71ff23730ed526d7080\",\n\n    \"images\": \"https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80\",\n\n    \"shareWith\": \"607dd78acbe580ef53d49470\",\n\n    \"available\": true,\n\n    \"availableDates.from\": \"02/26/1988\",\n\n    \"availableDates.to\": \"04/24/2021\",    \n\n    \"location\": \"Planet earth\",\n\n    \"homeType\": \"house\",\n\n    \"beds.singleBeds\": 2,\n\n    \"beds.doubleBeds\": 1,    \n\n    \"bedRooms\": 2,\n\n    \"bathRooms\": 3,\n\n    \"surfaceArea\": 55,\n\n    \"amenities.tv\": true,\n\n    \"rules.petsWelcome\": true\n\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/properties/6080c5f80368499c38036155/edit",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"properties",
+								"6080c5f80368499c38036155",
+								"edit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list of properties",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/properties",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"properties"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete properties",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/properties/6080c6340368499c38036156/delete",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"properties",
+								"6080c6340368499c38036156",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{jwt}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	]
+}
