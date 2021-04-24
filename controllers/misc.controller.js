@@ -11,24 +11,32 @@ module.exports.root = (req, res, next) => {
 }
 
 module.exports.like = (req, res, next) => {
-  const id = req.params.propertyId;
-  const user = req.currentUser;
+  const propertyLikedId = req.params.propertyId;
+  const me = req.currentUser;
+  const otherUser = req.body.propertyOwner;
 
-  Match.findOne({ property: id, user })
-    .then(property => {
-      if (!property) {
-        return Match.create({ property: id, user }).then((property) => {
-          console.log(property)
-          res.status(201).json({ data: "Property liked" });
+  Match.findOne({ userOne: otherUser, userTwo: me })
+    .then((response) => {
+      if (!response) {
+        return Match.create({
+          userOne: me,
+          userTwo: otherUser,
+          userTwoProperty: propertyLikedId,
+        }).then(() => {
+          res.status(201).json({});
         });
       } else {
-        return Match.findOneAndDelete({  property: id, user}).then((response) =>{
-          res.status(200).json({ data: "Property unliked" })
-        })
+        response.userOneProperty = propertyLikedId;
+        response.match = true;
+
+        return response.save().then(() => {
+          res.status(200).json({ data: "match" });
+        });
       }
     })
     .catch(next);
-} 
+};
+
 
 module.exports.reject = (req, res, next) => {
   const id = req.params.propertyId;
@@ -50,3 +58,10 @@ module.exports.reject = (req, res, next) => {
     })
     .catch(next);
 }; 
+
+// deberia separarlos ?
+
+// usuario hace like  (primer liker)
+// suministra información
+//
+
