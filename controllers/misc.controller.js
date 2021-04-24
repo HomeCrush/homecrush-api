@@ -1,3 +1,5 @@
+const createError = require('http-errors')
+
 const Match = require('../models/Match.model')
 const Reject = require("../models/Reject.model");
 
@@ -59,6 +61,43 @@ module.exports.unmatch = (req, res, next) => {
     .catch(next);
 };
 
+module.exports.matchResponse = (req, res, next) => {
+  const matchId = req.params.matchId
+  const me = req.currentUser
+  const matchResponse = req.body.matchResponse
+  let status = "Pending"
+  
+  Match.findById(matchId)
+    .then((response) => {
+      if (response.userOne == me) {
+        response.accepted.userOne = matchResponse;
+
+      } else if (response.userTwo == me) {
+        response.accepted.userTwo = matchResponse;
+
+      } else {
+        next(createError(401))
+      }
+
+      const acceptedArray = [response.accepted.userOne, response.accepted.userTwo]
+      const condition = (element) => element == "accepted"
+      const conditionTwo = (element) => element == "rejected"
+
+      if (acceptedArray.every(condition)) {
+        status = "Accepted"
+      } else if (acceptedArray.some(conditionTwo)) {
+        status = "Rejected"
+      }
+
+      return response.update().then(() => {
+        res.status(200).json({
+          status
+        })
+      })
+    })
+    .catch(next)
+}
+
 
 module.exports.reject = (req, res, next) => {
   const id = req.params.propertyId;
@@ -93,9 +132,3 @@ module.exports.reject = (req, res, next) => {
     })
     .catch(next);
 };
-
-// deberia separarlos ?
-
-// usuario hace like  (primer liker)
-// suministra información
-//
