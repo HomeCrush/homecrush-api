@@ -24,11 +24,6 @@ const propertySchema = new mongoose.Schema(
       required: "Images are required at least one",
     },
 
-    shareWith: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: "User",
-    },
-
     available: {
       type: Boolean,
       required: "Available field is required",
