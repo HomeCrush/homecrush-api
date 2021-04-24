@@ -27,6 +27,7 @@ const propertySchema = new mongoose.Schema(
     available: {
       type: Boolean,
       required: "Available field is required",
+      default: true
     },
 
     availableDates: {

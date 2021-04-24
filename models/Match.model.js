@@ -32,14 +32,17 @@ const matchSchema = new mongoose.Schema(
 
     accepted: {
       userOne: {
-        enum: ["accepted", "rejected"],
+        type: String,
+        enum: ["accepted", "rejected", "pending"],
+        default: "pending",
       },
-      
-      userTwo: {
-        enum: ["accepted", "rejected"],
-      },
-    }
 
+      userTwo: {
+        type: String,
+        enum: ["accepted", "rejected", "pending"],
+        default: "pending",
+      },
+    },
   },
   {
     timestamps: true,
