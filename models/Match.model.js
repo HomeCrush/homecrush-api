@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const matchSchema = new mongoose.Schema(
   {
     userOne: {
-      type: mongoose.SchemaTypes.ObjectId, //bob  // añice
+      type: mongoose.SchemaTypes.ObjectId,
       ref: "User",
       required: true,
     },
@@ -14,13 +14,13 @@ const matchSchema = new mongoose.Schema(
     },
 
     userTwo: {
-      type: mongoose.SchemaTypes.ObjectId, //alice  //bob
+      type: mongoose.SchemaTypes.ObjectId,
       ref: "User",
       required: true,
     },
 
     userTwoProperty: {
-      type: mongoose.SchemaTypes.ObjectId, //playa  //montaña
+      type: mongoose.SchemaTypes.ObjectId,
       ref: "Property",
       required: true,
     },
@@ -29,6 +29,17 @@ const matchSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+
+    accepted: {
+      userOne: {
+        enum: ["accepted", "rejected"],
+      },
+      
+      userTwo: {
+        enum: ["accepted", "rejected"],
+      },
+    }
+
   },
   {
     timestamps: true,
