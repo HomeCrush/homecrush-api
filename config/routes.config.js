@@ -19,6 +19,7 @@ router.get("/wishlist");//
 
 router.post("/properties/create", authMiddleware.isAuthenticated, propertiesController.create );
 router.get("/properties", authMiddleware.isAuthenticated, propertiesController.list);
+router.get("/properties/:id", authMiddleware.isAuthenticated, propertiesController.get);
 router.put("/properties/:id/edit", authMiddleware.isAuthenticated, propertiesController.update);
 router.delete("/properties/:id/delete", authMiddleware.isAuthenticated, propertiesController.deleteProperty);
 

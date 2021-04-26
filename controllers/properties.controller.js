@@ -9,6 +9,17 @@ module.exports.create = (req, res, next) => {
       .catch(next);
 };
 
+module.exports.get = (req, res, next) => {
+  Property.findById(req.params.id)
+    .then(property => {
+      if (!property) {
+        next(createError(404, 'Property not found'))
+      } else {
+        res.json(property)
+      }
+    })
+    .catch(next)
+}
 
 module.exports.update = (req, res, next) => {
   if (req.file) {
