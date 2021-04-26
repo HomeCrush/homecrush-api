@@ -19,20 +19,18 @@ router.get("/wishlist");//
 
 router.post("/properties/create", authMiddleware.isAuthenticated, propertiesController.create );
 router.get("/properties", authMiddleware.isAuthenticated, propertiesController.list);
-router.post("/properties/:id/edit", authMiddleware.isAuthenticated, propertiesController.update);
+router.put("/properties/:id/edit", authMiddleware.isAuthenticated, propertiesController.update);
 router.delete("/properties/:id/delete", authMiddleware.isAuthenticated, propertiesController.deleteProperty);
 
 // Match
-router.get("/properties/:propertyId/like", authMiddleware.isAuthenticated, miscControllers.like);
-router.get("/properties/:propertyId/unmatch", authMiddleware.isAuthenticated, miscControllers.unmatch);
+router.post("/properties/:propertyId/like", authMiddleware.isAuthenticated, miscControllers.like);
+router.post("/properties/:propertyId/unmatch", authMiddleware.isAuthenticated, miscControllers.unmatch);
 
 router.post("/properties/:matchId/response", authMiddleware.isAuthenticated, miscControllers.matchResponse);
 
 
 
-router.get("/properties/:propertyId/reject", authMiddleware.isAuthenticated, miscControllers.reject);
+router.post("/properties/:propertyId/reject", authMiddleware.isAuthenticated, miscControllers.reject);
 
-router.get("/properties/match");
-router.get("/properties/crush");
 
 module.exports = router;
