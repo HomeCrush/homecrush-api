@@ -49,7 +49,7 @@ const propertySchema = new mongoose.Schema(
     homeType: {
       type: String,
       enum: {
-        values: ["house", "aparment"],
+        values: ["house", "apartment"],
         message:
           "It is necessary to choose a type of property house or apartment",
       },
