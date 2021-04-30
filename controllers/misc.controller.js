@@ -120,7 +120,7 @@ module.exports.reject = (req, res, next) => {
       } else {
         return Reject.findOneAndDelete({
           property: id,
-          user
+          user 
         }).then(
           (response) => {
             res.status(200).json({
