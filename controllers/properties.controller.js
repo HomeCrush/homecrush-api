@@ -9,6 +9,8 @@ module.exports.create = (req, res, next) => {
       .catch(next);
 };
 
+//me renderice mis propiedades y las busque mi id
+
 module.exports.get = (req, res, next) => {
   Property.findById(req.params.id)
     .then(property => {
@@ -56,6 +58,7 @@ Property.findOneAndDelete( {
 }) .catch(next);
   };
 
+  //controller renderize mi lista de matches
   module.exports.list = (req, res, next) => {
     const criteria = {};
     const { search } = req.query;
