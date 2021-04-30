@@ -30,7 +30,6 @@ const userSchema = mongoose.Schema({
 
   name: {
     type: String,
-    required: "Name is required",
   },
 
   image: {
