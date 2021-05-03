@@ -86,3 +86,55 @@ module.exports.authenticate = (req, res, next) => {
       }
     })
 }
+
+//revisar para update el perfil
+module.exports.profileUpdate = (req, res, next) => {
+  console.log ("esto es",  req.body.image)
+  if(req.file){
+    req.body.image = req.file.path;
+  } console.log ("esto es", req.params.id)
+  User.findById(req.params.id)
+    .then((user) => {
+      console.log ("esto es", user)
+      if (!user) {
+        next(createError(404));
+        return;
+      }
+      if(user.toString() !== req.currentUser.toString()){
+        next(createError(403));
+        return;
+      }
+      Object.entries(req.body).forEach(([key, value]) => {
+        user[key] = value;
+      });
+        return user.save().then(() => res.json({}));
+    })
+    .catch(next);
+}; 
+
+//otra opción
+
+module.exports.updateProfile = (req, res, next) => {
+
+  console.log("user", req.currentUser)
+  const upDates = {
+      user: req.currentUser,
+  }
+  console.log(req.file)
+  if (req.file) {
+
+      upDates.image = req.file.path;
+  }
+  console.log("esto es updates", upDates)
+  User.findOneAndUpdate(upDates)
+      .then((user) => {
+        if (!user) {
+          next(createError(404));
+          return;
+        } else {
+          res.status(200).json({ })
+        }
+      })
+
+  .catch((e) => console.log("error", error))
+}
