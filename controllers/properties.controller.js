@@ -1,5 +1,6 @@
 const createError = require("http-errors");
 const Property = require("../models/Property.model");
+const Match = require("../models/Match.model");
 
 module.exports.create = (req, res, next) => {
   req.body.user = req.currentUser;
@@ -9,7 +10,6 @@ module.exports.create = (req, res, next) => {
       .catch(next);
 };
 
-//me renderice mis propiedades y las busque mi id
 
 module.exports.get = (req, res, next) => {
   Property.findById(req.params.id)
@@ -56,9 +56,11 @@ Property.findOneAndDelete( {
   }
   res.status(204).json({ status: 204, data: null });
 }) .catch(next);
-  };
 
-  //controller renderize mi lista de matches
+  };
+  
+ //revisar si sirve esta quiero que me de el listado con todas las propiedades
+
   module.exports.list = (req, res, next) => {
     const criteria = {};
     const { search } = req.query;
@@ -71,3 +73,36 @@ Property.findOneAndDelete( {
       .then((properties) => res.json(properties))
       .catch(next);
   };
+
+  //controller renderize mi lista de matches
+
+  module.exports.matchList = (req, res, next) => {
+    Match.find( { $and: [ {match: true }, { $or: [ { userOne: req.currentUser }, { userTwo: req.currentUser } ] } ] } )
+        .then((matchResponse) => {
+          if (!matchResponse) {
+            next(createError(404));
+            return;
+          }
+          res.status(200).json({ matchResponse });
+        }) .catch(next);
+ };
+
+ //me renderice las propiedades que yo he creado propiedades y las busque mi id
+
+ module.exports.showMyProperties = (req, res, next) => {
+  
+  const owner = req.currentUser
+  Property.findOne({owner})
+  .then((property) => {
+   
+    if (!property) {
+      next(createError(404));
+      return;
+    } else{
+      res.status(200).json({ property });
+    }
+  }) .catch(next);
+    };
+
+    
+    //controller de fecha (que me permita poner de esta fecha a esta fecha esta disponible )
