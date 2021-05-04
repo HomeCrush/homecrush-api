@@ -3,11 +3,15 @@ const Property = require("../models/Property.model");
 const Match = require("../models/Match.model");
 
 module.exports.create = (req, res, next) => {
-  req.body.user = req.currentUser;
-
+  req.body.owner = req.currentUser;
+  req.body.images = "https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80";
+  console.log(req.body)
     Property.create(req.body)
-    .then((property) => res.status(201).json(property))
-      .catch(next);
+    .then((property) => {
+      console.log("creando")
+      res.status(201).json(property)
+    })
+    .catch(next);
 };
 
 

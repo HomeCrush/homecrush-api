@@ -37,13 +37,14 @@ module.exports.create = (req, res, next) => {
 module.exports.get = (req, res, next) => {
 
   User.findById(req.currentUser)
-    .then(user => {
+    .then((user) => {
       if (!user) {
-        next(createError(404))
+        next(createError(404));
       } else {
-        res.json(user)
+        res.json(user);
       }
     })
+    .catch(next);
 }
 
 module.exports.authenticate = (req, res, next) => {
@@ -51,62 +52,49 @@ module.exports.authenticate = (req, res, next) => {
     email,
     password
   } = req.body
-
+  
   User.findOne({
-      email
-    })
-    .then(user => {
-      if (!user) {
-        next(createError(404, {
+    email,
+  })
+  .then((user) => {
+    if (!user) {
+      next(
+        createError(404, {
           errors: {
-            email: 'Email or password is incorrect'
-          }
-        }))
+            email: "Email or password is incorrect",
+          },
+        })
+        );
       } else {
-        return user.checkPassword(password)
-          .then(match => {
-            if (!match) {
-              next(createError(404, {
+        console.log("autenticando")
+        return user.checkPassword(password).then((match) => {
+          console.log(match)
+          if (!match) {
+            next(
+              createError(404, {
                 errors: {
-                  email: 'Email or password is incorrect'
-                }
-              }))
-            } else {
-              res.json({
-                access_token: jwt.sign({
-                    id: user.id
-                  },
-                  process.env.JWT_SECRET || 'changeme OK?', {
-                    expiresIn: '1d'
-                  }
-                )
+                  email: "Email or password is incorrect",
+                },
               })
-            }
-          })
+            );
+          } else {
+            res.json({
+              access_token: jwt.sign(
+                {
+                  id: user.id,
+                },
+                process.env.JWT_SECRET || "changeme OK?",
+                {
+                  expiresIn: "1d",
+                }
+              ),
+            });
+          }
+        });
       }
-    })
+    }).catch(next);    
 }
 
-//revisar para update el perfil
-module.exports.profileUpdate = (req, res, next) => {
-
-  if(req.file){
-    req.body.image = req.file.path;
-  } 
-  User.findOneAndUpdate({_id: req.currentUser})
-    .then((user) => {
-     
-      if (!user) {
-        next(createError(404));
-        return;
-      }
-      Object.entries(req.body).forEach(([key, value]) => {
-        user[key] = value;
-      });
-        return user.save(save).then((user) => res.json({ user }));
-    })
-    .catch(next);
-}; 
 
 //otra opción
 module.exports.editProfile = (req, res, next) => {
@@ -123,3 +111,4 @@ module.exports.editProfile = (req, res, next) => {
     })
     .catch((error) => next(error));
 };
+
