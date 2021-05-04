@@ -14,7 +14,7 @@ router.post("/register", usersController.create);
 router.post("/login", usersController.authenticate);
 router.get("/users/me", authMiddleware.isAuthenticated, usersController.get);
 /*router.get("/activate/:token");PLUS+*/
-router.put("/user/profileupdate/:id", authMiddleware.isAuthenticated, upload.single("image"), usersController.updateProfile);
+router.put("/user/editprofile", authMiddleware.isAuthenticated, upload.single("image"), usersController.editProfile);
 
 // Property
 
