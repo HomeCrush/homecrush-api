@@ -33,11 +33,9 @@ const propertySchema = new mongoose.Schema(
     availableDates: {
       from: {
         type: Date,
-        required: true,
       },
       to: {
         type: Date,
-        required: true,
       },
     },
 
