@@ -92,5 +92,6 @@ module.exports.authenticate = (req, res, next) => {
           }
         });
       }
-    }).catch(next);
+    }).catch(next);    
 }
+
