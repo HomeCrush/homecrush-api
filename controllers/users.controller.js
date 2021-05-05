@@ -95,3 +95,20 @@ module.exports.authenticate = (req, res, next) => {
     }).catch(next);    
 }
 
+
+//otra opción
+module.exports.editProfile = (req, res, next) => {
+
+  User.findOneAndUpdate({_id: req.currentUser}, {image: req.file.path})
+    .then((user) => { 
+      console.log(user)
+      if (!user) {
+        next(createError(404, "User not found"));
+      } else {
+        res.status(201).json({})
+          
+      }
+    })
+    .catch((error) => next(error));
+};
+

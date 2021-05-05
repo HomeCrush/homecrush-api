@@ -11,7 +11,7 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
     cloudinary: cloudinary,
     params: {
-        folder: 'wiredin/images',
+        folder: 'homecrush/images',
         allowedFormats: ['jpg', 'png', 'jpeg']
     }
 })

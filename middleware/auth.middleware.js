@@ -15,6 +15,7 @@ module.exports.isAuthenticated = (req, res, next) => {
                 authHeader.split(' ')[1] || '',
                 process.env.JWT_SECRET,
                 (error, decoded) => {
+                    
                     if (error) {
                         next(error)
                     }
