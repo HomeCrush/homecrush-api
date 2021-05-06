@@ -32,7 +32,9 @@ module.exports.like = (req, res, next) => {
           userTwo: otherUser,
           userTwoProperty: propertyLikedId,
         }).then(() => {
-          res.status(201).json({});
+          res.status(201).json({
+            status: "pending"
+          });
         });
       } else {
         response.userOneProperty = propertyLikedId;
@@ -40,7 +42,7 @@ module.exports.like = (req, res, next) => {
 
         return response.save().then(() => {
           res.status(200).json({
-            data: "match"
+            status: "match"
           });
         });
       }

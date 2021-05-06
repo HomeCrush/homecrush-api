@@ -66,7 +66,6 @@ module.exports.authenticate = (req, res, next) => {
         })
         );
       } else {
-        console.log("autenticando")
         return user.checkPassword(password).then((match) => {
           console.log(match)
           if (!match) {

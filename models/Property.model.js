@@ -172,10 +172,10 @@ const propertySchema = new mongoose.Schema(
   }
 );
 
-propertySchema.virtual("likes", {
-    ref: "Like",
-    localField: "_id",
-    foreignField: "property",
+propertySchema.virtual("matches", {
+    ref: "Match",
+    localField: "owner",
+    foreignField: "match",
 });
 
 const Property = mongoose.model("Property", propertySchema);

@@ -84,14 +84,32 @@ Property.findOneAndDelete( {
   //controller renderize mi lista de matches
 
   module.exports.matchList = (req, res, next) => {
-    Match.find( { $and: [ {match: true }, { $or: [ { userOne: req.currentUser }, { userTwo: req.currentUser } ] } ] } )
-        .then((matchResponse) => {
-          if (!matchResponse) {
-            next(createError(404));
-            return;
+    Match.find({
+      $and: [
+        { match: true },
+        { $or: [{ userOne: req.currentUser }, { userTwo: req.currentUser }] },
+      ],
+    })
+      .populate("userOneProperty")
+      .populate("userTwoProperty")
+      .then((matchResponse) => {
+
+        console.log(matchResponse)
+        let response = [];
+        matchResponse.forEach((match) => {
+          if (match.userOne !== req.currentUser) {
+            response.push(match.userTwoProperty);
+          } else {
+            response.push(match.userOneProperty);
           }
-          res.status(200).json({ matchResponse });
-        }) .catch(next);
+        });
+        if (!matchResponse) {
+          next(createError(404));
+          return;
+        }
+        res.status(200).json(response);
+      })
+      .catch(next);
  };
 
  //me renderice las propiedades que yo he creado propiedades y las busque mi id

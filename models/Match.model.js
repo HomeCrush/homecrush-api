@@ -52,11 +52,9 @@ const matchSchema = new mongoose.Schema(
   }
 );
 
+
+
 const Match = mongoose.model("Match", matchSchema);
 
 module.exports = Match;
 
-//id *
-//property i like *
-//id property owner *
-//id my own property  fill when other likes me

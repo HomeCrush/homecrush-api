@@ -10,10 +10,9 @@ router.get("/", miscControllers.root);
 
 // Users
 
-router.post("/register");
-router.post("/login");
+router.post("/register", usersController.create);
+router.post("/login", usersController.authenticate);
 router.get("/users/me", authMiddleware.isAuthenticated, usersController.get);
-/*router.get("/activate/:token");PLUS+*/
 router.put("/user/editprofile", authMiddleware.isAuthenticated, upload.single("image"), usersController.editProfile);
 
 // Property
