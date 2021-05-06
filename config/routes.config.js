@@ -10,15 +10,15 @@ router.get("/", miscControllers.root);
 
 // Users
 
-router.post("/register", usersController.create);
-router.post("/login", usersController.authenticate);
+router.post("/register");
+router.post("/login");
 router.get("/users/me", authMiddleware.isAuthenticated, usersController.get);
 /*router.get("/activate/:token");PLUS+*/
 router.put("/user/editprofile", authMiddleware.isAuthenticated, upload.single("image"), usersController.editProfile);
 
 // Property
 
-router.post("/properties/create", authMiddleware.isAuthenticated, propertiesController.create );
+router.post("/properties/create", authMiddleware.isAuthenticated, upload.single("images"), propertiesController.create );
 router.get("/properties/myproperties", authMiddleware.isAuthenticated, propertiesController.showMyProperties);
 router.get("/properties/matchlist", authMiddleware.isAuthenticated, propertiesController.matchList);
 router.get("/properties", authMiddleware.isAuthenticated, propertiesController.list);

@@ -15,7 +15,11 @@ module.exports.root = (req, res, next) => {
 module.exports.like = (req, res, next) => {
   const propertyLikedId = req.params.propertyId;
   const me = req.currentUser;
-  const otherUser = req.body.propertyOwner;
+  const otherUser = req.body.owner;
+  console.log(propertyLikedId)
+  console.log(me);
+  console.log(otherUser);
+
 
   Match.findOne({
       userOne: otherUser,
