@@ -105,7 +105,7 @@ module.exports.editProfile = (req, res, next) => {
       if (!user) {
         next(createError(404, "User not found"));
       } else {
-        res.status(201).json({})
+        res.status(201).json(user)
           
       }
     })
