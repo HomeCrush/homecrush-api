@@ -3,7 +3,6 @@ const Property = require("../models/Property.model");
 const Match = require("../models/Match.model");
 
 module.exports.create = (req, res, next) => {
-
   if (req.files) {
     req.body.images = req.files.map((file) => file.path);
   }
@@ -122,6 +121,3 @@ Property.findOneAndDelete( {
     }
   }) .catch(next);
     };
-
-    
- 
