@@ -124,4 +124,4 @@ Property.findOneAndDelete( {
     };
 
     
-    //controller de fecha (que me permita poner de esta fecha a esta fecha esta disponible )
+ 

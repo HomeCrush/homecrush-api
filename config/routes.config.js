@@ -25,7 +25,6 @@ router.get("/properties/:id", authMiddleware.isAuthenticated, propertiesControll
 router.put("/properties/:id/edit", authMiddleware.isAuthenticated, propertiesController.update);
 router.delete("/properties/:id/delete", authMiddleware.isAuthenticated, propertiesController.deleteProperty);
 
-
 // Match
 router.post("/properties/:propertyId/like", authMiddleware.isAuthenticated, miscControllers.like);
 router.post("/properties/:propertyId/unmatch", authMiddleware.isAuthenticated, miscControllers.unmatch);
