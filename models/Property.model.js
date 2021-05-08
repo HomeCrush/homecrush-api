@@ -88,27 +88,27 @@ const propertySchema = new mongoose.Schema(
     amenities: {
       tv: {
         type: Boolean,
-        default: false,
+        default: true,
       },
 
       wifi: {
         type: Boolean,
-        default: false,
+        default: true,
       },
 
       equippedKitchen: {
         type: Boolean,
-        default: false,
+        default: true,
       },
 
       livingRoom: {
         type: Boolean,
-        default: false,
+        default: true,
       },
 
       dinningRoom: {
         type: Boolean,
-        default: false,
+        default: true,
       },
 
       workArea: {
@@ -138,7 +138,7 @@ const propertySchema = new mongoose.Schema(
 
       parking: {
         type: Boolean,
-        default: false,
+        default: true,
       },
 
       gym: {
@@ -155,7 +155,7 @@ const propertySchema = new mongoose.Schema(
 
       petsWelcome: {
         type: Boolean,
-        default: false,
+        default: true,
       },
 
       childrenWelcome: {
