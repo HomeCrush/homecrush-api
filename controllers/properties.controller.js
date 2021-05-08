@@ -4,6 +4,23 @@ const Match = require("../models/Match.model");
 
 module.exports.create = (req, res, next) => {
 
+  console.log("plural",req.files)
+  console.log("files path",req.files.path);
+
+  let imageURIs = []; // array to hold the image urls
+   
+  if (req.files) { // if you are adding multiple files at a go
+
+    console.log(req.files)
+    const files = req.files; // array of images
+    for (const file of files) {
+      const { path } = file;
+      imageURIs.push(path);
+    };
+  }
+
+    req.body.images = imageURIs
+
   if (req.file) {
     req.body.images = req.file.path;
   }
@@ -124,4 +141,4 @@ Property.findOneAndDelete( {
     };
 
     
-    //controller de fecha (que me permita poner de esta fecha a esta fecha esta disponible )
+ 

@@ -17,7 +17,7 @@ router.put("/user/editprofile", authMiddleware.isAuthenticated, upload.single("i
 
 // Property
 
-router.post("/properties/create", authMiddleware.isAuthenticated, upload.single("images"), propertiesController.create );
+router.post("/properties/create", authMiddleware.isAuthenticated, upload.array("images"), propertiesController.create );
 router.get("/properties/myproperties", authMiddleware.isAuthenticated, propertiesController.showMyProperties);
 router.get("/properties/matchlist", authMiddleware.isAuthenticated, propertiesController.matchList);
 router.get("/properties", authMiddleware.isAuthenticated, propertiesController.list);
