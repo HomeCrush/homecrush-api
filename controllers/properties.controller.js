@@ -69,15 +69,12 @@ Property.findOneAndDelete( {
  //revisar si sirve esta quiero que me de el listado con todas las propiedades
 
   module.exports.list = (req, res, next) => {
-    const criteria = {};
-    const { search } = req.query;
-  
-    if (search) {
-      criteria.name = new RegExp(search, "i");
-    }
-  
-    Property.find(criteria)
-      .then((properties) => res.json(properties))
+    console.log(req.currentUser)
+    Property.find({ owner: { $ne: req.currentUser } })
+      .then((properties) => {
+        console.log("largo", properties.length)
+        res.json(properties)
+      }) 
       .catch(next);
   };
 
@@ -93,8 +90,6 @@ Property.findOneAndDelete( {
       .populate("userOneProperty")
       .populate("userTwoProperty")
       .then((matchResponse) => {
-
-        console.log(matchResponse)
         let response = [];
         matchResponse.forEach((match) => {
           if (match.userOne !== req.currentUser) {
@@ -114,17 +109,16 @@ Property.findOneAndDelete( {
 
  //me renderice las propiedades que yo he creado propiedades y las busque mi id
 
- module.exports.showMyProperties = (req, res, next) => {
-  
+ module.exports.showMyProperties = (req, res, next) => {  
   const owner = req.currentUser
-  Property.findOne({owner})
+  Property.find({owner})
   .then((property) => {
    
     if (!property) {
       next(createError(404));
       return;
     } else{
-      res.status(200).json({ property });
+      res.status(200).json(property);
     }
   }) .catch(next);
     };
