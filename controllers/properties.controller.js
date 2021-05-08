@@ -4,8 +4,8 @@ const Match = require("../models/Match.model");
 
 module.exports.create = (req, res, next) => {
 
-  if (req.file) {
-    req.body.images = req.file.path;
+  if (req.files) {
+    req.body.images = req.files.map((file) => file.path);
   }
     
   req.body.owner = req.currentUser;
