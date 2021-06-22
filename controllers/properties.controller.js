@@ -19,6 +19,7 @@ module.exports.create = (req, res, next) => {
 
 module.exports.get = (req, res, next) => {
   Property.findById(req.params.id)
+    .populate("owner")
     .then(property => {
       if (!property) {
         next(createError(404, 'Property not found'))
@@ -91,7 +92,7 @@ Property.findOneAndDelete( {
       .then((matchResponse) => {
         let response = [];
         matchResponse.forEach((match) => {
-          if (match.userOne !== req.currentUser) {
+          if (match.userOne === req.currentUser) {
             response.push(match.userTwoProperty);
           } else {
             response.push(match.userOneProperty);
