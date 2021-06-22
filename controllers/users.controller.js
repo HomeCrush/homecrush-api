@@ -94,7 +94,6 @@ module.exports.authenticate = (req, res, next) => {
 }
 
 
-//otra opción
 module.exports.editProfile = (req, res, next) => {
 
   User.findOneAndUpdate({_id: req.currentUser}, {image: req.file.path})

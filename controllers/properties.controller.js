@@ -64,8 +64,8 @@ Property.findOneAndDelete( {
 }) .catch(next);
 
   };
-  
- //revisar si sirve esta quiero que me de el listado con todas las propiedades
+
+
 
   module.exports.list = (req, res, next) => {
     console.log(req.currentUser)
@@ -77,7 +77,7 @@ Property.findOneAndDelete( {
       .catch(next);
   };
 
-  //controller renderize mi lista de matches
+
 
   module.exports.matchList = (req, res, next) => {
     Match.find({
@@ -106,7 +106,6 @@ Property.findOneAndDelete( {
       .catch(next);
  };
 
- //me renderice las propiedades que yo he creado propiedades y las busque mi id
 
  module.exports.showMyProperties = (req, res, next) => {  
   const owner = req.currentUser
